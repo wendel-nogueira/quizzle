@@ -1,0 +1,26 @@
+div.login-page {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(107.56deg, var(--foreground-color-primary) 0%, var(--foreground-color-secondary) 100%);
+}
+
+aside.login-aside {
+    background: var(--background-color-primary);
+    width: 100%;
+    max-Width: 400px;
+    height: 100%;
+    padding: 120px 50px;
+
+    @media (max-width: 768px) {
+        max-width: 100%;
+    }
+}
+
+div.login-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
