@@ -12,7 +12,7 @@
   --background-color-primary: #FAFAFA;
   --background-color-secondary: #FFFFFF;
   --background-color-tertiary: #E0E0E0;
-  --background-color-quaternary: #101010;
+  --background-color-quaternary: #1010102d;
 
   --foreground-color-primary: #630FFF;
   --foreground-color-secondary: #478BF8;
@@ -53,4 +53,66 @@
 body {
   color: rgb(var(--text-color-primary));
   background: var(--background-color-primary);
+}
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.header-container {
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+}
+
+.header-menu-nav {
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--background-color-quaternary);
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: none;
+  }
+}
+
+.header-menu-nav.open {
+  display: block;
+}
+
+.header-menu-nav-list {
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    padding-top: 10rem;
+    background: var(--background-color-primary);
+  }
+}
+
+.header-menu-nav-list li a {
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.open-menu {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+}
+
+.close-menu {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
 }

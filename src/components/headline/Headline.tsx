@@ -1,21 +1,20 @@
 import React from 'react';
-import '@fontsource/poppins/500.css';
 
 
-interface LabelProps extends React.LabelHTMLAttributes<HTMLLabelElement> {
+interface HeadlineProps extends React.HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;
 }
 
-export default function Label({ children, ...props }: LabelProps) {
+export default function Headline({ children, ...props }: HeadlineProps) {
     return (
-        <label {...props} style={{
+        <h3 {...props} style={{
             fontFamily: 'Poppins, sans-serif',
-            fontSize: '14px',
+            fontSize: '16px',
             fontWeight: 500,
             color: 'var(--text-color-primary)',
             ...props.style,
         }}>
             {children}
-        </label>
+        </h3>
     )
 }
