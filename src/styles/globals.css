@@ -13,6 +13,7 @@
   --background-color-secondary: #FFFFFF;
   --background-color-tertiary: #E0E0E0;
   --background-color-quaternary: #1010102d;
+  --background-color-quinary: #F4F4F4;
 
   --foreground-color-primary: #630FFF;
   --foreground-color-secondary: #478BF8;
@@ -34,6 +35,10 @@
   --border-color-primary: #C1C1C1;
   --border-color-secondary: #E0E0E0;
   --border-color-tertiary: #39E1C0;
+
+  --ranking-color-first: #F5CD15;
+  --ranking-color-second: #D0D0D0;
+  --ranking-color-third: #DA8860;
 }
 
 /*@media (prefers-color-scheme: dark) {
