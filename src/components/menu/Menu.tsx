@@ -64,17 +64,17 @@ export default function Menu({ style, openMenu, ...props }: MenuProps) {
                     <li style={{
                         width: '100%',
                     }}>
-                        <LinkComponent href="/ranking" className={active.includes('/ranking') || active === '/painel/ranking' ? 'active' : ''}>ranking</LinkComponent>
+                        <LinkComponent href="/painel/ranking" className={active.includes('/ranking') || active === '/painel/ranking' ? 'active' : ''}>ranking</LinkComponent>
                     </li>
                     <li style={{
                         width: '100%',
                     }}>
-                        <LinkComponent href="/questoes" className={active.includes('/questoes') || active === '/painel/questoes' ? 'active' : ''}>questões</LinkComponent>
+                        <LinkComponent href="/painel/questoes" className={active.includes('/questoes') || active === '/painel/questoes' ? 'active' : ''}>questões</LinkComponent>
                     </li>
                     <li style={{
                         width: '100%',
                     }}>
-                        <LinkComponent href="/temas" className={active.includes('/temas') || active === '/painel/temas' ? 'active' : ''}>temas</LinkComponent>
+                        <LinkComponent href="/painel/temas" className={active.includes('/temas') || active === '/painel/temas' ? 'active' : ''}>temas</LinkComponent>
                     </li>
                 </ul>
             </nav>
