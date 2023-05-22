@@ -33,7 +33,7 @@ export default function Header({ ...props }) {
                 width: '100%',
             }}>
                 <Link href="/painel" className='header-logo'>
-                    <Image alt="Logo Quizzle - Uma ilustração de um cérebro juntamente com uma ilustração de uma lampada e dois balões de fala com um sinal de interrogação e exclamação em cada um deles." src="/logo.png" width={40} height={40} />
+                    <Image alt="Logo Quizzle - Uma ilustração de um cérebro juntamente com uma ilustração de uma lampada e dois balões de fala com um sinal de interrogação e exclamação em cada um deles." src="/logo.png" width={40} height={40} priority={true} />
                 </Link>
                 <Menu openMenu={open} />
                 <div className='open-menu' style={{

@@ -5,7 +5,7 @@ interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
     children?: React.ReactNode;
 }
 
-export default function FormGroup({ children, ...props }: FormProps) {
+export default function Form({ children, ...props }: FormProps) {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
     }

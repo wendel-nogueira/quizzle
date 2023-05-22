@@ -31,6 +31,8 @@
   --alert-color-warning-dark: #B37F00;
   --alert-color-error: #E92E30;
   --alert-color-error-dark: #B30000;
+  --alert-color-info: #478BF8;
+  --alert-color-info-dark: #0F4C81;
 
   --border-color-primary: #C1C1C1;
   --border-color-secondary: #E0E0E0;
@@ -119,5 +121,13 @@ body::-webkit-scrollbar {
 
   @media (max-width: 768px) {
     display: block;
+  }
+}
+
+main {
+  margin: 40px auto 0px;
+
+  @media (max-width: 1024px) {
+    margin: 0px auto;
   }
 }

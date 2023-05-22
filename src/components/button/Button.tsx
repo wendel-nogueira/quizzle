@@ -11,7 +11,7 @@ export default function Button({ children, ...props}: ButtonProps) {
         <button {...props} style={{
             padding: '10px 24px',
             background: 'var(--foreground-color-tertiary)',
-            color: 'var(--text-color-primary)',
+            color: 'var(--text-color-tertiary)',
             borderRadius: '8px',
             border: '1px solid var(--foreground-color-tertiary)',
             display: 'flex',
