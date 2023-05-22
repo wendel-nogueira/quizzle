@@ -1,0 +1,16 @@
+.question-container {
+    @media (max-width: 1024px) {
+        flex-direction: column;
+    }
+}
+
+#input::placeholder {
+    color: var(--text-color-primary);
+    opacity: 1;
+}
+
+.question-header {
+    @media (max-width: 1024px) {
+        flex-direction: column;
+    }
+}

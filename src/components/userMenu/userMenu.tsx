@@ -59,14 +59,6 @@ export default function UserMenu({ ...props }) {
                         padding: '4px 0',
                         cursor: 'pointer',
                     }}>
-                        <p>perfil</p>
-                    </li>
-                    <li style={{
-                        width: '100%',
-                        textAlign: 'center',
-                        padding: '4px 0',
-                        cursor: 'pointer',
-                    }}>
                         <p>sair</p>
                     </li>
                 </ul>

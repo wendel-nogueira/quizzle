@@ -15,7 +15,6 @@ export default function Main({ children, ...props }: MainProps) {
             height: '100%',
             minHeight: 'calc(100vh - 164px)',
             maxWidth: '1280px',
-            margin: '40px auto 0px',
             padding: '0px 20px',
             ...props.style,
         }}>
