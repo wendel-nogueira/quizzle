@@ -2,9 +2,9 @@ import React from 'react';
 import '@fontsource/noto-sans/400.css';
 
 
-export default function Input({ ...props}) {
+export default function TextArea({ ...props}) {
     return (
-        <input {...props} style={{
+        <textarea {...props} style={{
             padding: '8px 12px',
             background: 'var(--background-color-secondary)',
             border: '1px solid var(--border-color-primary)',
@@ -13,6 +13,7 @@ export default function Input({ ...props}) {
             fontSize: '14px',
             width: '100%',
             color: 'var(--text-color-primary)',
+            resize: 'vertical',
             ...props.style,
         }}/>
     )

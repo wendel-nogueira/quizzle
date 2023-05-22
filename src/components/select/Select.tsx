@@ -11,9 +11,10 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
     styleDiv?: React.CSSProperties;
     styleLabel?: React.CSSProperties;
     styleSelect?: React.CSSProperties;
+    children?: React.ReactNode;
 }
 
-export default function Select({ label, options, value, onChange, ...props }: SelectProps) {
+export default function Select({ children, label, options, value, onChange, ...props }: SelectProps) {
     return (
         <div className='select-container' style={{
             display: 'flex',
@@ -40,6 +41,7 @@ export default function Select({ label, options, value, onChange, ...props }: Se
                         );
                     })
                 }
+                {children}
             </select>
         </div>
     )
