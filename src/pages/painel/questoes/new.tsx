@@ -217,7 +217,7 @@ const New: NextPage = () => {
                                         pergunta: event.target.value,
                                     });
                                 }} />
-                                <InputError message={questionError}/>
+                                <InputError message={questionError} id='error-question'/>
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor='alternativa1'>Alternativa 1</Label>
@@ -225,7 +225,7 @@ const New: NextPage = () => {
                                     minWidth: '300px',
                                     border: alternativeError[0].length > 0 ? '1px solid var(--alert-color-error)' : '1px solid var(--border-color-primary)',
                                 }} value={question.alternativas[0]} onChange={handleAlternatives} />
-                                <InputError message={alternativeError[0]} />
+                                <InputError message={alternativeError[0]} id='error-alternative1'/>
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor='alternativa2'>Alternativa 2</Label>
@@ -233,7 +233,7 @@ const New: NextPage = () => {
                                     minWidth: '300px',
                                     border: alternativeError[1].length > 0 ? '1px solid var(--alert-color-error)' : '1px solid var(--border-color-primary)',
                                 }} value={question.alternativas[1]} onChange={handleAlternatives} />
-                                <InputError message={alternativeError[1]} />
+                                <InputError message={alternativeError[1]} id='error-alternative2'/>
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor='alternativa3'>Alternativa 3</Label>
@@ -241,7 +241,7 @@ const New: NextPage = () => {
                                     minWidth: '300px',
                                     border: alternativeError[2].length > 0 ? '1px solid var(--alert-color-error)' : '1px solid var(--border-color-primary)',
                                 }} value={question.alternativas[2]} onChange={handleAlternatives} />
-                                <InputError message={alternativeError[2]} />
+                                <InputError message={alternativeError[2]} id='error-alternative3'/>
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor='resposta'>Resposta</Label>
@@ -254,7 +254,7 @@ const New: NextPage = () => {
                                         resposta: event.target.value,
                                     });
                                 }} />
-                                <InputError message={answerError} />
+                                <InputError message={answerError} id='error-answer'/>
                             </FormGroup>
                             <FormGroup>
                                 <Label htmlFor='tema'>Tema</Label>
@@ -286,7 +286,7 @@ const New: NextPage = () => {
                                         })
                                     }
                                 </Select>
-                                <InputError message={themeError} />
+                                <InputError message={themeError} id='error-theme'/>
                             </FormGroup>
 
                             <div style={{

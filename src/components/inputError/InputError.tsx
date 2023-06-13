@@ -3,6 +3,7 @@ import '@fontsource/noto-sans/400.css';
 
 
 interface InputErrorProps {
+    id?: string;
     message: string;
     style?: React.CSSProperties;
 }
@@ -33,7 +34,8 @@ export default function InputError(props: InputErrorProps) {
                     color: 'var(--alert-color-error)',
                     fontSize: '14px',
                     fontWeight: '400',
-                }}>
+                }}
+                id={props.id}>
                     {props.message}
                 </p>
             </div>
