@@ -44,7 +44,7 @@ export default function Alert({ ...props }: AlertProps) {
                 {props.type === 'info' && <Info size={20} weight="bold" />}
                 {props.type === 'success' && <Check size={20} weight="bold" />}
                 {props.type === 'warning' && <Warning size={20} weight="bold" />}
-                <span style={{
+                <span id='alert-info' style={{
                     fontFamily: 'Poppins, sans-serif',
                     fontSize: '16px',
                     fontWeight: 400,
