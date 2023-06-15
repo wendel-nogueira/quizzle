@@ -9,27 +9,26 @@ import InputIcon from '@/components/inputIcon/InputIcon';
 import Table from '@/components/table/Table';
 import IconButton from '@/components/iconButton/IconButton';
 import Modal from '@/components/modal/Modal';
-import { Plus, MagnifyingGlass, Pencil, Trash } from '@phosphor-icons/react';
-import getQuestions from '@/services/getQuestions';
-import deleteQuestionById from '@/services/deleteQuestionById';
-import '@fontsource/noto-sans/400.css';
 import Alert from '@/components/alert/Alert';
+import { Plus, MagnifyingGlass, Pencil, Trash } from '@phosphor-icons/react';
+import getThemes from '@/services/getThemes';
+import deleteThemeById from '@/services/deleteThemeById';
 
 
 const Index: NextPage = () => {
     const router = useRouter();
-    const [questions, setQuestions] = useState([]);
-    const [questionsFiltered, setQuestionsFiltered] = useState([]);
-    const [question, setQuestion] = useState({} as any);
+    const [themes, setThemes] = useState([]);
+    const [themesFiltered, setThemesFiltered] = useState([]);
+    const [theme, setTheme] = useState({} as any);
     const [openModal, setOpenModal] = useState(false);
     const [openAlert, setOpenAlert] = useState(true);
     const [alertType, setAlertType] = useState('' as any);
     const [alertInfo, setAlertInfo] = useState('' as any);
 
     useEffect(() => {
-        getQuestions().then((response) => {
-            response.forEach((question: any, index: number) => {
-                question['acoes'] = <>
+        getThemes().then((response) => {
+            response.forEach((theme: any, index: number) => {
+                theme['acoes'] = <>
                     <IconButton key={'edit' + index} icon={
                         <Pencil size={16} weight="regular" />
                     }
@@ -38,7 +37,7 @@ const Index: NextPage = () => {
                             color: 'var(--text-color-tertiary)',
                         }}
                         onClick={() => {
-                            return router.push(`/painel/questoes/edit/${question.id}`);
+                            return router.push(`/painel/temas/edit/${theme.id}`);
                         }} />
                     <IconButton key={'delete' + index} icon={
                         <Trash size={16} weight="regular" />
@@ -48,32 +47,31 @@ const Index: NextPage = () => {
                             color: 'var(--text-color-tertiary)',
                         }}
                         onClick={() => {
-                            setQuestion(question);
+                            setTheme(theme);
                             setOpenModal(true);
                         }} />
                 </>
             });
 
-            setQuestions(response);
-            setQuestionsFiltered(response);
+            setThemes(response);
+            setThemesFiltered(response);
         });
     }, [router]);
 
     useEffect(() => {
-        setQuestionsFiltered(questions);
-    }, [questions]);
+        setThemesFiltered(themes);
+    }, [themes]);
 
     const handleSearch = (event: any) => {
         const value = event.target.value.toLowerCase();
-        const questionsFiltered = questions.filter((question: any) => {
-            return question.pergunta.toLowerCase().includes(value) ||
-                question.tema.toLowerCase().includes(value);
+        const themesFiltered = themes.filter((theme: any) => {
+            return theme.tema.toLowerCase().includes(value);
         });
 
-        setQuestionsFiltered(questionsFiltered);
+        setThemesFiltered(themesFiltered);
 
         if (value === '') {
-            setQuestionsFiltered(questions);
+            setThemesFiltered(themes);
         }
     };
 
@@ -96,7 +94,7 @@ const Index: NextPage = () => {
         <>
             <Header />
             <Main>
-                <div className="question-container" style={{
+                <div className="theme-container" style={{
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
@@ -104,7 +102,7 @@ const Index: NextPage = () => {
                     height: '100%',
                     gap: '32px',
                 }}>
-                    <div className="question-header" style={{
+                    <div className="theme-header" style={{
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'space-between',
@@ -114,7 +112,7 @@ const Index: NextPage = () => {
                             padding: '10px',
                             width: 'max-content',
                             marginRight: 'auto',
-                        }} onClick={() => router.push('/painel/questoes/new')}>
+                        }} onClick={() => router.push('/painel/temas/new')}>
                             <Plus size={20} weight="bold" />
                             <span>cadastrar</span>
                         </Button>
@@ -123,21 +121,21 @@ const Index: NextPage = () => {
                             width: '300px',
                         }} onChange={handleSearch} />
                     </div>
-                    <div className="question-list" style={{
+                    <div className="theme-list" style={{
                         display: 'flex',
                         flexDirection: 'column',
                     }}>
                         <Table
-                            data={questionsFiltered}
+                            data={themesFiltered}
                             columns={{
-                                pergunta: 'Pergunta',
-                                tema: 'Tema',
-                                acoes: 'Ações',
+                                'tema': 'Tema',
+                                'descricao': 'Descrição',
+                                'acoes': 'Ações',
                             }}
                             columnsQuantity={3}
                             thwidth={[
-                                '60%',
                                 '20%',
+                                '60%',
                                 '10%',
                             ]}
                         />
@@ -152,32 +150,32 @@ const Index: NextPage = () => {
                         fontWeight: 400,
                         color: 'var(--text-color-primary)',
                         marginBottom: '16px',
-                    }}>Deseja realmente excluir esta pergunta?</p>
+                    }}>Deseja realmente excluir este tema?</p>
                     <p style={{
                         fontFamily: 'Noto Sans, sans-serif',
                         fontSize: '16px',
                         fontWeight: 400,
                         color: 'var(--foreground-color-primary)',
-                    }}>{question.pergunta}</p>
+                    }}>{theme.tema}</p>
                 </>
             } onClose={() => {
                 setOpenModal(false);
-                //setQuestion({} as any);
+                //setTheme({} as any);
             }} onConfirm={() => {
-                console.log(question);
+                console.log(theme);
                 setOpenModal(false);
-                //setQuestion({} as any);
+                //setTheme({} as any);
 
-                deleteQuestionById(question.id).then((response) => {
-                    handleAlert('success', 'Pergunta excluída com sucesso!');
+                deleteThemeById(theme.id).then((response) => {
+                    handleAlert('success', 'Tema excluído com sucesso!');
                 }).catch((error) => {
-                    handleAlert('error', 'Erro ao excluir pergunta!');
+                    handleAlert('error', 'Erro ao excluir tema!');
                 });
             }} open={openModal} />
             <Alert type={alertType} info={alertInfo} onClose={() => setOpenAlert(false)} open={openAlert} />
             <Footer />
         </>
     );
-};
+}
 
 export default Index;
