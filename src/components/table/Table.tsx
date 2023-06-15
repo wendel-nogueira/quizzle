@@ -4,7 +4,8 @@ import '@fontsource/noto-sans/400.css';
 
 interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
     data: any[];
-    columns: any[];
+    columns: any;
+    columnsQuantity: number;
     styletable?: React.CSSProperties;
     stylethead?: React.CSSProperties;
     styletbody?: React.CSSProperties;
@@ -14,7 +15,7 @@ interface TableProps extends React.TableHTMLAttributes<HTMLTableElement> {
     thwidth: string[];
 }
 
-export default function Table({ data, columns, ...props }: TableProps) {
+export default function Table({ data, columns, columnsQuantity, ...props }: TableProps) {
     return (
         <>
             <table {...props} style={{
@@ -37,12 +38,12 @@ export default function Table({ data, columns, ...props }: TableProps) {
                         padding: '10px 32px',
                         ...props.styletr,
                     }}>
-                        {columns.map((column, index) => {
+                        {Object.keys(columns).map((column: any, index: number) => {
                             return (
                                 <>
                                     <th key={index} style={{
                                         textAlign: index === 0 ? 'left' :
-                                            index === columns.length - 1 ? 'right' :
+                                            index === columnsQuantity - 1 ? 'right' :
                                                 'center',
                                         fontFamily: 'Noto Sans',
                                         fontWeight: 'normal',
@@ -50,9 +51,9 @@ export default function Table({ data, columns, ...props }: TableProps) {
                                         width: '100%',
                                         maxWidth: `calc(${props.thwidth[index]})`,
                                         ...props.styleth,
-                                    }}>{column}</th>
+                                    }}>{columns[column]}</th>
                                     {
-                                        index !== columns.length - 1 && (
+                                        index !== columnsQuantity - 1 && (
                                             <th key={'div' + index} style={{
                                                 width: '25px',
                                                 height: '100%',
@@ -79,7 +80,7 @@ export default function Table({ data, columns, ...props }: TableProps) {
                 height: '1px',
                 background: 'var(--foreground-color-primary)',
                 margin: '24px auto',
-            }}/>
+            }} />
             <table {...props} style={{
                 width: '100%',
                 borderCollapse: 'collapse',
@@ -104,12 +105,12 @@ export default function Table({ data, columns, ...props }: TableProps) {
                             padding: '10px 32px',
                             ...props.styletr,
                         }}>
-                            {columns.map((column, index) => {
+                            {Object.keys(columns).map((column: any, index: number) => {
                                 return (
                                     <>
                                         <td key={index} style={{
                                             textAlign: index === 0 ? 'left' :
-                                                index === columns.length - 1 ? 'right' :
+                                                index === columnsQuantity - 1 ? 'right' :
                                                     'center',
                                             fontFamily: 'Noto Sans',
                                             fontWeight: 'normal',
@@ -119,13 +120,13 @@ export default function Table({ data, columns, ...props }: TableProps) {
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: index === 0 ? 'flex-start' :
-                                                index === columns.length - 1 ? 'flex-end' :
+                                                index === columnsQuantity - 1 ? 'flex-end' :
                                                     'center',
                                             gap: '8px',
                                             ...props.styletd,
                                         }}>{item[column]}</td>
                                         {
-                                            index !== columns.length - 1 && (
+                                            index !== columnsQuantity - 1 && (
                                                 <td key={'div' + index} style={{
                                                     width: '25px',
                                                     height: '100%',
@@ -168,7 +169,7 @@ export default function Table({ data, columns, ...props }: TableProps) {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     gap: '8px',
-                                }}>Nenhuma questão encontrada</td>
+                                }}>Sem registros!</td>
                             </tr>
                         )
                     }
