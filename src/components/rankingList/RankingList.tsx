@@ -78,9 +78,9 @@ export default function RankingList({ ranking, ...props }: RankingListProps) {
                                         }}>
                                             <span>{index + 1}°</span>
                                             <span>|</span>
-                                            <span>{item.score} pontos</span>
+                                            <span>{item.pontuacao} pontos</span>
                                             <span>|</span>
-                                            <span>{item.player}</span>
+                                            <span>{item.usuario}</span>
                                             <span style={{
                                                 display: 'flex',
                                                 alignItems: 'center',

@@ -13,7 +13,7 @@ import TextArea from '@/components/textArea/TextArea';
 import Select from '@/components/select/Select';
 import Alert from '@/components/alert/Alert';
 import InputError from '@/components/inputError/InputError';
-import getThemeList from '@/services/getThemeList';
+import getTheme from '@/services/getThemes';
 import createQuestion from '@/services/createQuestion';
 import '@fontsource/noto-sans/400.css';
 import '@fontsource/poppins/600.css';
@@ -39,7 +39,7 @@ const New: NextPage = () => {
     const [themeError, setThemeError] = useState('');
 
     useEffect(() => {
-        getThemeList().then((response: any) => {
+        getTheme().then((response: any) => {
             setThemeList(response);
         });
     }, []);
@@ -54,23 +54,14 @@ const New: NextPage = () => {
         console.log(question);
 
         createQuestion(question).then((response: any) => {
-            if (response) {
-                setAlertType('success');
-                setAlertInfo('Pergunta cadastrada com sucesso!');
-                setOpenAlert(true);
+            setAlertType('success');
+            setAlertInfo('Pergunta cadastrada com sucesso!');
+            setOpenAlert(true);
 
-                setTimeout(() => {
-                    setOpenAlert(false);
-                    router.push('/painel/questoes');
-                }, 3000);
-            } else {
-                setAlertType('error');
-                setAlertInfo('Erro ao cadastrar pergunta!');
-                setOpenAlert(true);
-                setTimeout(() => {
-                    setOpenAlert(false);
-                }, 3000);
-            }
+            setTimeout(() => {
+                setOpenAlert(false);
+                router.push('/painel/questoes');
+            }, 3000);
         }).catch((error: any) => {
             setAlertType('error');
             setAlertInfo('Erro ao cadastrar pergunta!');
@@ -281,7 +272,7 @@ const New: NextPage = () => {
                                     {
                                         themeList && themeList.map((theme: any, index: number) => {
                                             return (
-                                                <option key={index} value={theme}>{theme}</option>
+                                                <option key={index} value={theme.id}>{theme.tema}</option>
                                             );
                                         })
                                     }

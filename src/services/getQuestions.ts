@@ -1,21 +1,12 @@
 export default async function getQuestions(): Promise<any> {
-    const questions = [
-        {
-            id: 1,
-            pergunta: 'Qual a capital do Brasil?',
-            tema: 'Geografia',
-        },
-        {
-            id: 2,
-            pergunta: 'Qual o maior país do mundo?',
-            tema: 'Geografia',
-        },
-        {
-            id: 3,
-            pergunta: 'Qual o menor país do mundo?',
-            tema: 'Geografia',
-        }
-    ];
-    
+    const api = process.env.NEXT_PUBLIC_API_URL;
+    let questions: never[] = [];
+
+    await fetch(`${api}/questions`).then((response) => {
+        return response.json();
+    }).then((data) => {
+        questions = data;
+    });
+
     return questions;
 }

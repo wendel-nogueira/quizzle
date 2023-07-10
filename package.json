@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "cypress": "cypress open",
-    "jest": "jest --watch"
+    "jest": "jest --watch",
+    "test": "jest"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -31,15 +32,23 @@
     "react-dom": "18.2.0",
     "recharts": "^2.6.2",
     "sass": "^1.62.1",
+    "socket.io": "^4.7.1",
+    "socket.io-client": "^4.7.1",
     "styled-components": "^6.0.0-rc.1",
+    "supertest": "^6.3.3",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@types/socket.io": "^3.0.2",
+    "@types/socket.io-client": "^3.0.0",
+    "@types/supertest": "^2.0.12",
+    "@types/ws": "^8.5.5",
     "cypress": "^12.11.0",
-    "jest": "^29.5.0",
+    "jest": "^29.6.1",
     "jest-environment-jsdom": "^29.5.0"
   }
 }

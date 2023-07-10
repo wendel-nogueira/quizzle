@@ -1,7 +1,7 @@
-export default async function deleteQuestionById(id: number): Promise<any> {
+export default async function deleteThemeById(id: number): Promise<any> {
     const api = process.env.NEXT_PUBLIC_API_URL;
 
-    await fetch(`${api}/questions/${id}`, {
+    await fetch(`${api}/themes/${id}`, {
         method: 'DELETE'
     }).then((data) => {
         return;

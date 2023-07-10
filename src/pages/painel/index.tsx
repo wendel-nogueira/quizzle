@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
+import io from 'socket.io-client';
 import Header from '@/components/header/Header';
 import Main from '@/components/main/Main';
 import Footer from '@/components/footer/Footer';
@@ -8,30 +9,27 @@ import ListItem from '@/components/listItem/listItem';
 import Headline from '@/components/headline/Headline';
 import Aside from '@/components/aside/Aside';
 
-import getCountThemesRegistered from '@/services/getCountThemesRegistered';
+import getCountQuestionByThemesRegistered from '@/services/getCountQuestionByThemesRegistered';
 import getHitsByTheme from '@/services/getHitsByTheme';
 import getWrongByTheme from '@/services/getWrongByTheme';
 import getCountGamesPlayed from '@/services/getCountGamesPlayed';
-import getCountRegisteredPlayers from '@/services/getCountRegisteredPlayers';
 import getCountRegisteredQuestions from '@/services/getCountRegisteredQuestions';
 import getHighestScore from '@/services/getHighestScore';
 import getRecentGames from '@/services/getRecentGames';
 
-
 const Index: NextPage = () => {
-    const [countThemesRegistered, setCountThemesRegistered] = useState([]);
+    const [countQuestionByThemesRegistered, setcountQuestionByThemesRegistered] = useState([]);
     const [hitsByTheme, setHitsByTheme] = useState([]);
     const [wrongByTheme, setWrongByTheme] = useState([]);
 
     const [countGamesPlayed, setCountGamesPlayed] = useState(0);
-    const [countRegisteredPlayers, setCountRegisteredPlayers] = useState(0);
     const [countRegisteredQuestions, setCountRegisteredQuestions] = useState(0);
     const [highestScore, setHighestScore] = useState([0, '']);
     const [recentGames, setRecentGames] = useState([]);
 
     useEffect(() => {
-        getCountThemesRegistered().then((response) => {
-            setCountThemesRegistered(response);
+        getCountQuestionByThemesRegistered().then((response) => {
+            setcountQuestionByThemesRegistered(response);
         });
     }, []);
 
@@ -50,12 +48,6 @@ const Index: NextPage = () => {
     useEffect(() => {
         getCountGamesPlayed().then((response) => {
             setCountGamesPlayed(response);
-        });
-    }, []);
-
-    useEffect(() => {
-        getCountRegisteredPlayers().then((response) => {
-            setCountRegisteredPlayers(response);
         });
     }, []);
 
@@ -83,7 +75,7 @@ const Index: NextPage = () => {
             <Main>
                 <div className='dashboard-container' style={{
                     display: 'flex',
-                    alignItems: 'center',
+                    //alignItems: 'center',
                     width: '100%',
                     height: '100%',
                     justifyContent: 'space-between',
@@ -96,9 +88,22 @@ const Index: NextPage = () => {
                             justifyContent: 'space-between',
                             width: '100%',
                         }}>
-                            <Chart chartTitle="temas cadastrados" chartData={countThemesRegistered}></Chart>
-                            <Chart chartTitle="acertos por tema" chartData={hitsByTheme}></Chart>
-                            <Chart chartTitle="erros por tema" chartData={wrongByTheme}></Chart>
+                            {
+                                countQuestionByThemesRegistered.length > 0 && (
+                                    <Chart chartTitle="perguntas por tema" chartData={countQuestionByThemesRegistered}></Chart>
+                                )
+                            }
+
+                            {
+                                hitsByTheme.length > 0 && (
+                                    <Chart chartTitle="acertos por tema" chartData={hitsByTheme}></Chart>
+                                )
+                            }
+                            {
+                                wrongByTheme.length > 0 && (
+                                    <Chart chartTitle="erros por tema" chartData={wrongByTheme}></Chart>
+                                )
+                            }
                         </div>
                         <div style={{
                             width: '100%',
@@ -110,7 +115,6 @@ const Index: NextPage = () => {
                         }}>
                             <Headline>Perguntas cadastradas: {countRegisteredQuestions} perguntas</Headline>
                             <Headline>Jogos realizados: {countGamesPlayed} jogos</Headline>
-                            <Headline>Jogadores cadastrados: {countRegisteredPlayers} jogadores</Headline>
                             <Headline>Maior pontuação: {highestScore[0]} pontos - Jogador(a): {highestScore[1]}</Headline>
                         </div>
                     </Aside>
@@ -130,7 +134,7 @@ const Index: NextPage = () => {
                             recentGames.map((info: any, index: number) => {
                                 return (
                                     <ListItem key={index}>
-                                        {info.score} pontos - {info.player}
+                                        {info.pontuacao} pontos - {info.usuario}
                                     </ListItem>
                                 )
                             })

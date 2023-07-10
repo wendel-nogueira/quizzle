@@ -35,15 +35,17 @@ const Login: NextPage = () => {
                         }}>
                             Entrar
                         </Button>
-                        <Button type="button" style={{
+                        {/* <Button type="button" style={{
                             background: 'var(--foreground-color-quaternary)',
                         }}
                         onClick={() => {
                             console.log('Entrar com o Google');
                         }}>
                             <Image alt="Logo do Google" src="/google-logo.svg" width={20} height={20} />
-                            <span>Entrar com o Google</span>
-                        </Button>
+                            <span style={{
+                                color: 'var(--text-color-primary)',
+                            }}>Entrar com o Google</span>
+                        </Button> */}
                     </Form>
                 </div>
             </aside>

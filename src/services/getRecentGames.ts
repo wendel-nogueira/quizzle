@@ -1,12 +1,14 @@
 export default async function getRecentGames(): Promise<any> {
-    const recentGames = [
-        { player: 'teste', score: 1000 },
-        { player: 'teste', score: 1000 },
-        { player: 'teste', score: 1000 },
-        { player: 'teste', score: 1000 },
-        { player: 'teste', score: 1000 },
-        { player: 'teste', score: 1000 },
-    ];
+    let recentGames: any[] = [];
     
+    const api = process.env.NEXT_PUBLIC_API_URL;
+
+    await fetch(`${api}/game/recent`).then((response) => {
+        return response.json();
+    }).then((data) => {
+        recentGames = data;
+        console.log(recentGames);
+    });
+
     return recentGames;
 }

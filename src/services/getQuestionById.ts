@@ -1,9 +1,12 @@
-export default async function getQuestionById(id: number): Promise<any> {
-    return {
-        id: 1,
-        pergunta: 'Qual a cor do cavalo branco de Napoleão?',
-        alternativas: ['Preto', 'Marrom', 'Cinza'],
-        resposta: 'Branco',
-        tema: 'História'
-    };
+export default async function getQuestionById(id: string): Promise<any> {
+    const api = process.env.NEXT_PUBLIC_API_URL;
+    let question = {};
+
+    await fetch(`${api}/questions/${id}`).then((response) => {
+        return response.json();
+    }).then((data) => {
+        question = data;
+    });
+
+    return question;
 }
