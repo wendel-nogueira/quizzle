@@ -35,8 +35,6 @@ const New: NextPage = () => {
             return;
         }
 
-        console.log(theme);
-
         createTheme(theme).then((response: any) => {
             if (response) {
                 setAlertType('success');
@@ -67,11 +65,10 @@ const New: NextPage = () => {
 
     const validateFields = () => {
         let error = false;
-        const regex = new RegExp('^[a-zA-Z0-9 ]+$');
+        const regex = new RegExp('^[a-zA-ZÀ-ÿ0-9]+$');
 
         if (!theme.tema || theme.tema.length === 0 || theme.tema.trim().length === 0) {
             setThemeError('Preencha o tema!');
-            console.log('aqui');
             error = true;
         } else {
             if (theme.tema.length > 255) {

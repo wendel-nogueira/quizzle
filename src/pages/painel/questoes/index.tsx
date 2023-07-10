@@ -29,6 +29,7 @@ const Index: NextPage = () => {
     useEffect(() => {
         getQuestions().then((response) => {
             response.forEach((question: any, index: number) => {
+                question['tema'] = question.tema.tema;
                 question['acoes'] = <>
                     <IconButton key={'edit' + index} icon={
                         <Pencil size={16} weight="regular" />
@@ -162,11 +163,8 @@ const Index: NextPage = () => {
                 </>
             } onClose={() => {
                 setOpenModal(false);
-                //setQuestion({} as any);
             }} onConfirm={() => {
-                console.log(question);
                 setOpenModal(false);
-                //setQuestion({} as any);
 
                 deleteQuestionById(question.id).then((response) => {
                     handleAlert('success', 'Pergunta excluída com sucesso!');

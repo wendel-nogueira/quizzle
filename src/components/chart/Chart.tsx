@@ -1,5 +1,5 @@
 import React from 'react';
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import '@fontsource/poppins/500.css';
 
 
@@ -57,6 +57,7 @@ export default function LinkComponent({ chartTitle, chartData, ...props }: Chart
                                 <Cell key={`cell-${index}`} fill={chartColors[index % chartColors.length]} />
                             ))}
                         </Pie>
+                        <Tooltip />
                     </PieChart>
                 </ResponsiveContainer>
             </div>

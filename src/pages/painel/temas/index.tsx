@@ -25,7 +25,7 @@ const Index: NextPage = () => {
     const [alertType, setAlertType] = useState('' as any);
     const [alertInfo, setAlertInfo] = useState('' as any);
 
-    useEffect(() => {
+    const updateThemes = () => {
         getThemes().then((response) => {
             response.forEach((theme: any, index: number) => {
                 theme['acoes'] = <>
@@ -56,6 +56,10 @@ const Index: NextPage = () => {
             setThemes(response);
             setThemesFiltered(response);
         });
+    };
+
+    useEffect(() => {
+        updateThemes();
     }, [router]);
 
     useEffect(() => {
@@ -168,6 +172,8 @@ const Index: NextPage = () => {
 
                 deleteThemeById(theme.id).then((response) => {
                     handleAlert('success', 'Tema excluído com sucesso!');
+
+                    updateThemes();
                 }).catch((error) => {
                     handleAlert('error', 'Erro ao excluir tema!');
                 });

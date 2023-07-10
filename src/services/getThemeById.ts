@@ -1,7 +1,12 @@
-export default async function getThemeById(id: number): Promise<any> {
-    return {
-        id: 1,
-        tema: 'História',
-        descricao: 'Perguntas sobre história'
-    };
+export default async function getThemeById(id: string): Promise<any> {
+    const api = process.env.NEXT_PUBLIC_API_URL;
+    let theme = {};
+
+    await fetch(`${api}/themes/${id}`).then((response) => {
+        return response.json();
+    }).then((data) => {
+        theme = data;
+    });
+
+    return theme;
 }

@@ -31,9 +31,9 @@ const Edit: NextPage = () => {
     const [descriptionError, setDescriptionError] = useState('');
 
     useEffect(() => {
-        const id = parseInt(theme_id as string);
+        const id = theme_id as string;
 
-        if (theme_id) {
+        if (id) {
             getThemeById(id).then((response: any) => {
                 setTheme(response);
             });
@@ -47,7 +47,11 @@ const Edit: NextPage = () => {
             return;
         }
 
-        const id = parseInt(theme_id as string);
+        const id = theme_id as string;
+
+        if (!id) {
+            return;
+        }
 
         updateThemeById(id, theme).then((response: any) => {
             if (response) {
@@ -79,11 +83,10 @@ const Edit: NextPage = () => {
 
     const validateFields = () => {
         let error = false;
-        const regex = new RegExp('^[a-zA-Z0-9 ]+$');
+        const regex = new RegExp('^[a-zA-ZÀ-ÿ0-9]+$');
 
         if (!theme.tema || theme.tema.length === 0 || theme.tema.trim().length === 0) {
             setThemeError('Preencha o tema!');
-            console.log('aqui');
             error = true;
         } else {
             if (theme.tema.length > 255) {

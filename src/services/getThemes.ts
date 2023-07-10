@@ -1,21 +1,12 @@
 export default async function getThemes(): Promise<any> {
-    const themes = [
-        {
-            id: 1,
-            tema: 'Geografia',
-            descricao: 'Perguntas sobre Geografia',
-        },
-        {
-            id: 2,
-            tema: 'História',
-            descricao: 'Perguntas sobre História',
-        },
-        {
-            id: 3,
-            tema: 'Matemática',
-            descricao: 'Perguntas sobre Matemática',
-        }
-    ];
-    
+    const api = process.env.NEXT_PUBLIC_API_URL;
+    let themes: never[] = [];
+
+    await fetch(`${api}/themes`).then((response) => {
+        return response.json();
+    }).then((data) => {
+        themes = data;
+    });
+
     return themes;
 }

@@ -54,7 +54,7 @@ export default function Table({ data, columns, columnsQuantity, ...props }: Tabl
                                     }}>{columns[column]}</th>
                                     {
                                         index !== columnsQuantity - 1 && (
-                                            <th key={'div' + index} style={{
+                                            <th key={index * columnsQuantity} style={{
                                                 width: '25px',
                                                 height: '100%',
                                                 display: 'flex',
@@ -127,7 +127,7 @@ export default function Table({ data, columns, columnsQuantity, ...props }: Tabl
                                         }}>{item[column]}</td>
                                         {
                                             index !== columnsQuantity - 1 && (
-                                                <td key={'div' + index} style={{
+                                                <td key={index * columnsQuantity} style={{
                                                     width: '25px',
                                                     height: '100%',
                                                     display: 'flex',

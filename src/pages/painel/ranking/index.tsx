@@ -10,36 +10,35 @@ import Select from '@/components/select/Select';
 
 import getOverallRating from '@/services/getOverallRating';
 import getClassificationByTheme from '@/services/getClassificationByTheme';
-import getThemeList from '@/services/getThemeList';
+import getTheme from '@/services/getThemes';
 
 
 const Index: NextPage = () => {
     const [overallRating, setOverallRating] = useState<any[]>([]);
-    const [theme, setTheme] = useState<string>('');
+    const [theme, setTheme] = useState<any>({});
     const [themeList, setThemeList] = useState<string[]>([]);
     const [themeRanking, setThemeRanking] = useState<any[]>([]);
 
     useEffect(() => {
-        getThemeList().then((response: any) => {
+        getTheme().then((response: any) => {
             setThemeList(response);
-            setTheme(response[0]);
+            setTheme(response[0].id);
         });
     }, []);
 
     useEffect(() => {
         getOverallRating().then((response: any) => {
-            setOverallRating(response);
+            setOverallRating(response.pontuacoes);
         });
     }, []);
 
     useEffect(() => {
-        getClassificationByTheme(theme).then((response: any) => {
-            if (response === undefined) {
-                setThemeRanking([]);
-                return;
-            }
+        if (!theme) {
+            return;
+        }
 
-            setThemeRanking(response.ranking);
+        getClassificationByTheme(theme).then((response: any) => {
+            setThemeRanking(response.pontuacoes);
         });
     }, [theme]);
 
@@ -61,7 +60,7 @@ const Index: NextPage = () => {
                         <Headline style={{
                             textAlign: 'center',
                             fontSize: '20px',
-                        }}>Ranking geral</Headline>
+                        }}>Ranking Geral</Headline>
 
                         <RankingList ranking={overallRating}></RankingList>
                     </Aside>
@@ -73,7 +72,7 @@ const Index: NextPage = () => {
                         gap: '40px',
                         position: 'relative',
                     }}>
-                        <Select label='Tema:' options={themeList} value={theme} styleLabel={{
+                        <Select label='Tema:' value={theme.id} styleLabel={{
                             textAlign: 'center',
                             fontSize: '20px',
                         }} styleSelect={{
@@ -85,7 +84,19 @@ const Index: NextPage = () => {
                             fontWeight: 500,
                         }} onChange={(event) => {
                             setTheme(event.target.value);
-                        }}></Select>
+                        }}>
+                            {
+                                themeList.map((theme: any, index: number) => {
+                                    if (theme.tema === 'Geral') {
+                                        return;
+                                    }
+                                    
+                                    return (
+                                        <option key={index} value={theme.id}>{theme.tema}</option>
+                                    );
+                                })
+                            }
+                        </Select>
 
                         <RankingList ranking={themeRanking}></RankingList>
                     </Aside>

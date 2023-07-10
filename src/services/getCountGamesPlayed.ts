@@ -1,5 +1,12 @@
 export default async function getCountGamesPlayed(): Promise<number> {
-    const countGamesPlayed = 1000;
-    
-    return countGamesPlayed;
+    const api = process.env.NEXT_PUBLIC_API_URL;
+    let count = 0;
+
+    await fetch(`${api}/game/count`).then((response) => {
+        return response.json();
+    }).then((data) => {
+        count = data;
+    });
+
+    return count;
 }

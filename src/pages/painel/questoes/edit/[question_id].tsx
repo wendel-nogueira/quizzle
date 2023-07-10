@@ -13,7 +13,7 @@ import TextArea from '@/components/textArea/TextArea';
 import Select from '@/components/select/Select';
 import Alert from '@/components/alert/Alert';
 import InputError from '@/components/inputError/InputError';
-import getThemeList from '@/services/getThemeList';
+import getTheme from '@/services/getThemes';
 import getQuestionById from '@/services/getQuestionById';
 import updateQuestionById from '@/services/updateQuestionById';
 import '@fontsource/noto-sans/400.css';
@@ -42,27 +42,30 @@ const Edit: NextPage = () => {
     const [themeError, setThemeError] = useState('');
 
     useEffect(() => {
-        getThemeList().then((response: any) => {
+        getTheme().then((response: any) => {
             setThemeList(response);
         });
     }, []);
 
     useEffect(() => {
-        const id = parseInt(question_id as string);
+        const id = question_id as string;
 
-        if (question_id) {
+        if (id) {
             getQuestionById(id).then((response: any) => {
-                setQuestion(response);
+                const question = {
+                    pergunta: response.pergunta,
+                    alternativas: response.alternativas,
+                    resposta: response.resposta,
+                    tema: response.tema.id,
+                }
+
+                setQuestion(question);
             });
         }
     }, [question_id]);
 
     const handleAlternatives = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
-
-        if (!value || value.length === 0) {
-            return;
-        }
 
         const index = parseInt(event.target.id.split('alternativa')[1]) - 1;
         let alternativesTemp = question.alternativas;
@@ -82,26 +85,17 @@ const Edit: NextPage = () => {
             return;
         }
 
-        const id = parseInt(question_id as string);
+        const id = question_id as string;
     
         updateQuestionById(id, question).then((response: any) => {
-            if (response) {
-                setAlertType('success');
-                setAlertInfo('Pergunta atualizada com sucesso!');
-                setOpenAlert(true);
+            setAlertType('success');
+            setAlertInfo('Pergunta atualizada com sucesso!');
+            setOpenAlert(true);
 
-                setTimeout(() => {
-                    setOpenAlert(false);
-                    router.push('/painel/questoes');
-                }, 3000);
-            } else {
-                setAlertType('error');
-                setAlertInfo('Erro ao atualizar pergunta!');
-                setOpenAlert(true);
-                setTimeout(() => {
-                    setOpenAlert(false);
-                }, 3000);
-            }
+            setTimeout(() => {
+                setOpenAlert(false);
+                router.push('/painel/questoes');
+            }, 3000);
         }).catch((error: any) => {
             setAlertType('error');
             setAlertInfo('Erro ao atualizar pergunta!');
@@ -294,7 +288,7 @@ const Edit: NextPage = () => {
                                     {
                                         themeList && themeList.map((theme: any, index: number) => {
                                             return (
-                                                <option key={index} value={theme}>{theme}</option>
+                                                <option key={index} value={theme.id}>{theme.tema}</option>
                                             );
                                         })
                                     }
